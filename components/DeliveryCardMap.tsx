@@ -14,9 +14,9 @@ const defaultIcon = L.icon({
 });
 L.Marker.prototype.options.icon = defaultIcon;
 
-// Demo route: two points in London (pickup → drop-off)
-const PICKUP: [number, number] = [51.5075, -0.1278];
-const DROPOFF: [number, number] = [51.515, -0.102];
+// Demo route: two points in Aberdeen, Scotland (pickup → drop-off)
+const PICKUP: [number, number] = [57.147, -2.098];   // west end
+const DROPOFF: [number, number] = [57.152, -2.088]; // city centre
 const ROUTE: [number, number][] = [PICKUP, DROPOFF];
 
 export default function DeliveryCardMap() {
