@@ -26,21 +26,21 @@ export default function Navbar() {
 
   return (
     <motion.header
-      className="sticky top-0 z-50 bg-white"
+      className="sticky top-0 z-50 overflow-visible bg-white"
       style={{ boxShadow: shadow }}
     >
-      <nav className="mx-auto flex min-h-[88px] max-w-7xl items-center justify-between px-6 py-3 lg:min-h-[120px] lg:px-8 lg:py-4">
+      <nav className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-6 lg:px-8">
         <Link
           href="/"
-          className="flex items-center shrink-0"
+          className="flex shrink-0 items-center overflow-visible"
           aria-label="Urban Move Logistics home"
         >
           <img
             src="/logo.svg"
             alt="Urban Move Logistics"
-            className="h-16 w-auto object-contain object-left sm:h-20 lg:h-24"
-            width={280}
-            height={120}
+            className="h-9 w-auto origin-left scale-[2.2] object-contain object-left sm:scale-[2.5] lg:scale-[2.7]"
+            width={560}
+            height={192}
           />
         </Link>
         <div className="hidden items-center gap-8 md:flex">
@@ -53,13 +53,13 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link href="#waitlist">
+          <Link href="#join">
             <motion.span
               className="inline-flex items-center rounded-xl bg-[#e0110c] px-5 py-2.5 text-sm font-semibold text-white"
               whileHover={{ scale: 1.03, backgroundColor: "#c00f0a" }}
               whileTap={{ scale: 0.98 }}
             >
-              Join Waitlist
+              Join the Movement
             </motion.span>
           </Link>
         </div>

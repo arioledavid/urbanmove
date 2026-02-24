@@ -12,7 +12,7 @@ export default function VisionStatement() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          We&apos;re building the logistics backbone for local commerce — so
+          We&apos;re building the logistics backbone for local commerce so
           businesses can focus on what they do best, and customers get their
           orders when they need them.
         </motion.p>

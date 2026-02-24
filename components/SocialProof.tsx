@@ -15,7 +15,9 @@ function AnimatedNumber({ value }: { value: number }) {
   }, [isInView, value, motionValue]);
 
   useEffect(() => {
-    const unsub = springValue.on("change", (v) => setDisplayValue(Math.round(v)));
+    const unsub = springValue.on("change", (v) =>
+      setDisplayValue(Math.round(v)),
+    );
     return () => unsub();
   }, [springValue]);
 
@@ -31,9 +33,8 @@ export default function SocialProof() {
       viewport={{ once: true }}
     >
       <p className="text-center text-base font-medium text-gray-700 sm:text-lg">
-        Already{" "}
-        <AnimatedNumber value={124} /> businesses and{" "}
-        <AnimatedNumber value={86} /> riders have joined the waitlist.
+        Already <AnimatedNumber value={124} /> businesses and{" "}
+        <AnimatedNumber value={86} /> riders have joined the movement.
       </p>
     </motion.section>
   );

@@ -40,7 +40,7 @@ export default function Hero() {
               movement.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <Link href="#waitlist">
+              <Link href="#join">
                 <motion.span
                   className="inline-flex items-center rounded-xl bg-[#e0110c] px-6 py-3.5 text-base font-semibold text-white"
                   whileHover={{ scale: 1.03 }}
@@ -49,7 +49,7 @@ export default function Hero() {
                   Join as a Business
                 </motion.span>
               </Link>
-              <Link href="#waitlist">
+              <Link href="#join">
                 <motion.span
                   className="inline-flex items-center rounded-xl border-2 border-[#e0110c] px-6 py-3.5 text-base font-semibold text-[#e0110c] transition hover:bg-[#e0110c]/5"
                   whileHover={{ scale: 1.02 }}
@@ -59,9 +59,6 @@ export default function Hero() {
                 </motion.span>
               </Link>
             </div>
-            <p className="mt-6 text-sm text-gray-500">
-              Launching soon in major UK cities.
-            </p>
           </motion.div>
 
           <motion.div

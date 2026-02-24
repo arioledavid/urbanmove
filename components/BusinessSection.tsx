@@ -7,33 +7,23 @@ import FeatureCard from "./FeatureCard";
 const businessFeatures = [
   {
     title: "On-Demand Delivery",
-    description:
-      "Dispatch deliveries instantly when customers place orders.",
+    description: "Dispatch deliveries instantly when customers place orders.",
   },
   {
     title: "Bulk & Scheduled Dispatch",
-    description:
-      "Schedule and automate your daily delivery operations.",
+    description: "Schedule and automate your daily delivery operations.",
   },
   {
     title: "Real-Time Tracking Dashboard",
-    description:
-      "Monitor every delivery in real-time with full visibility.",
+    description: "Monitor every delivery in real-time with full visibility.",
   },
   {
     title: "Multi-Location Support",
-    description:
-      "Manage multiple branches under one unified system.",
-  },
-  {
-    title: "Staff Access Control",
-    description:
-      "Assign roles and permissions to team members.",
+    description: "Manage multiple branches under one unified system.",
   },
   {
     title: "Smart Dispatch Matching",
-    description:
-      "Our system intelligently assigns the best available rider.",
+    description: "Our system intelligently assigns the best available rider.",
   },
 ];
 
@@ -68,13 +58,13 @@ export default function BusinessSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <Link href="#waitlist">
+          <Link href="#join">
             <motion.span
               className="inline-flex items-center rounded-xl bg-[#e0110c] px-8 py-3.5 text-base font-semibold text-white"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
             >
-              Join Business Waitlist
+              Join as a Business
             </motion.span>
           </Link>
         </motion.div>

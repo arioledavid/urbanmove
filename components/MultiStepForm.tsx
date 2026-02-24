@@ -31,13 +31,7 @@ const businessTypes = [
   "Other",
 ];
 
-const weeklyRange = [
-  "1–10",
-  "11–50",
-  "51–100",
-  "101–250",
-  "250+",
-];
+const weeklyRange = ["1–10", "11–50", "51–100", "101–250", "250+"];
 
 const vehicleOptions = ["Bike", "Car", "None"];
 const earningsRange = ["Under £200", "£200–500", "£500–1000", "£1000+"];
@@ -71,14 +65,17 @@ export default function MultiStepForm() {
   const validateStep2 = () => {
     const e: Record<string, string> = {};
     if (userType === "business") {
-      if (!formData.businessName?.trim()) e.businessName = "Business name is required.";
+      if (!formData.businessName?.trim())
+        e.businessName = "Business name is required.";
       if (!formData.businessType) e.businessType = "Please select a type.";
       if (!formData.city?.trim()) e.city = "City is required.";
-      if (!formData.weeklyDeliveries) e.weeklyDeliveries = "Please select a range.";
+      if (!formData.weeklyDeliveries)
+        e.weeklyDeliveries = "Please select a range.";
     } else {
       if (!formData.city?.trim()) e.city = "City is required.";
       if (!formData.vehicleType) e.vehicleType = "Please select vehicle type.";
-      if (!formData.expectedEarnings) e.expectedEarnings = "Please select a range.";
+      if (!formData.expectedEarnings)
+        e.expectedEarnings = "Please select a range.";
     }
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -92,7 +89,7 @@ export default function MultiStepForm() {
   const handleSubmit = () => {
     setSubmitted(true);
     setReferralLink(
-      `${typeof window !== "undefined" ? window.location.origin : ""}/?ref=${formData.email?.replace(/@.*/, "")}`
+      `${typeof window !== "undefined" ? window.location.origin : ""}/?ref=${formData.email?.replace(/@.*/, "")}`,
     );
   };
 
@@ -148,7 +145,10 @@ export default function MultiStepForm() {
             className="space-y-5"
           >
             <div>
-              <label htmlFor="fullName" className="block text-sm font-medium text-white/90">
+              <label
+                htmlFor="fullName"
+                className="block text-sm font-medium text-white/90"
+              >
                 Full Name
               </label>
               <input
@@ -164,7 +164,10 @@ export default function MultiStepForm() {
               )}
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-white/90">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-white/90"
+              >
                 Email Address
               </label>
               <input
@@ -180,7 +183,10 @@ export default function MultiStepForm() {
               )}
             </div>
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-white/90">
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium text-white/90"
+              >
                 Phone Number
               </label>
               <input
@@ -219,7 +225,10 @@ export default function MultiStepForm() {
             {userType === "business" ? (
               <>
                 <div>
-                  <label htmlFor="businessName" className="block text-sm font-medium text-white/90">
+                  <label
+                    htmlFor="businessName"
+                    className="block text-sm font-medium text-white/90"
+                  >
                     Business Name
                   </label>
                   <input
@@ -231,11 +240,16 @@ export default function MultiStepForm() {
                     placeholder="Your business name"
                   />
                   {errors.businessName && (
-                    <p className="mt-1 text-sm text-[#fcb900]">{errors.businessName}</p>
+                    <p className="mt-1 text-sm text-[#fcb900]">
+                      {errors.businessName}
+                    </p>
                   )}
                 </div>
                 <div>
-                  <label htmlFor="businessType" className="block text-sm font-medium text-white/90">
+                  <label
+                    htmlFor="businessType"
+                    className="block text-sm font-medium text-white/90"
+                  >
                     Business Type
                   </label>
                   <select
@@ -254,11 +268,16 @@ export default function MultiStepForm() {
                     ))}
                   </select>
                   {errors.businessType && (
-                    <p className="mt-1 text-sm text-[#fcb900]">{errors.businessType}</p>
+                    <p className="mt-1 text-sm text-[#fcb900]">
+                      {errors.businessType}
+                    </p>
                   )}
                 </div>
                 <div>
-                  <label htmlFor="city" className="block text-sm font-medium text-white/90">
+                  <label
+                    htmlFor="city"
+                    className="block text-sm font-medium text-white/90"
+                  >
                     City
                   </label>
                   <input
@@ -301,7 +320,10 @@ export default function MultiStepForm() {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="weeklyDeliveries" className="block text-sm font-medium text-white/90">
+                  <label
+                    htmlFor="weeklyDeliveries"
+                    className="block text-sm font-medium text-white/90"
+                  >
                     Estimated weekly deliveries
                   </label>
                   <select
@@ -320,11 +342,16 @@ export default function MultiStepForm() {
                     ))}
                   </select>
                   {errors.weeklyDeliveries && (
-                    <p className="mt-1 text-sm text-[#fcb900]">{errors.weeklyDeliveries}</p>
+                    <p className="mt-1 text-sm text-[#fcb900]">
+                      {errors.weeklyDeliveries}
+                    </p>
                   )}
                 </div>
                 <div>
-                  <label htmlFor="biggestChallenge" className="block text-sm font-medium text-white/90">
+                  <label
+                    htmlFor="biggestChallenge"
+                    className="block text-sm font-medium text-white/90"
+                  >
                     Biggest delivery challenge
                   </label>
                   <textarea
@@ -340,7 +367,10 @@ export default function MultiStepForm() {
             ) : (
               <>
                 <div>
-                  <label htmlFor="riderCity" className="block text-sm font-medium text-white/90">
+                  <label
+                    htmlFor="riderCity"
+                    className="block text-sm font-medium text-white/90"
+                  >
                     City
                   </label>
                   <input
@@ -382,7 +412,9 @@ export default function MultiStepForm() {
                     ))}
                   </div>
                   {errors.vehicleType && (
-                    <p className="mt-1 text-sm text-[#fcb900]">{errors.vehicleType}</p>
+                    <p className="mt-1 text-sm text-[#fcb900]">
+                      {errors.vehicleType}
+                    </p>
                   )}
                 </div>
                 <div>
@@ -413,7 +445,10 @@ export default function MultiStepForm() {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="preferredHours" className="block text-sm font-medium text-white/90">
+                  <label
+                    htmlFor="preferredHours"
+                    className="block text-sm font-medium text-white/90"
+                  >
                     Preferred working hours
                   </label>
                   <input
@@ -426,7 +461,10 @@ export default function MultiStepForm() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="expectedEarnings" className="block text-sm font-medium text-white/90">
+                  <label
+                    htmlFor="expectedEarnings"
+                    className="block text-sm font-medium text-white/90"
+                  >
                     Expected weekly earnings range
                   </label>
                   <select
@@ -445,7 +483,9 @@ export default function MultiStepForm() {
                     ))}
                   </select>
                   {errors.expectedEarnings && (
-                    <p className="mt-1 text-sm text-[#fcb900]">{errors.expectedEarnings}</p>
+                    <p className="mt-1 text-sm text-[#fcb900]">
+                      {errors.expectedEarnings}
+                    </p>
                   )}
                 </div>
               </>
@@ -490,7 +530,7 @@ export default function MultiStepForm() {
               members.
             </p>
             <p className="mt-6 text-sm text-white/80">
-              Invite 3 businesses or riders to move up the waitlist.
+              Invite 3 businesses or riders to join the movement.
             </p>
             <motion.button
               type="button"

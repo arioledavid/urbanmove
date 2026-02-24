@@ -15,7 +15,7 @@ export default function RiderSection() {
   return (
     <section
       id="for-riders"
-      className="bg-gray-50 px-6 py-20 lg:px-8 lg:py-28"
+      className="bg-gray-200 px-6 py-20 lg:px-8 lg:py-28"
     >
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
@@ -43,20 +43,15 @@ export default function RiderSection() {
               ))}
             </ul>
             <div className="mt-10 flex flex-col gap-3">
-              <Link href="#waitlist">
+              <Link href="#join">
                 <motion.span
                   className="inline-flex items-center rounded-xl bg-[#e0110c] px-8 py-3.5 text-base font-semibold text-white"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Join Rider Waitlist
+                  Join as a Rider
                 </motion.span>
               </Link>
-              <p className="text-sm">
-                <span className="font-medium text-[#fcb900]">
-                  Be among the first riders onboarded.
-                </span>
-              </p>
             </div>
           </motion.div>
           <div className="hidden lg:block" aria-hidden />
