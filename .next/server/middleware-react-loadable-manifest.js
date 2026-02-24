@@ -1,1 +1,0 @@
-self.__REACT_LOADABLE_MANIFEST="{\"components/Hero.tsx -> @/components/DeliveryCardMap\":{\"id\":\"components/Hero.tsx -> @/components/DeliveryCardMap\",\"files\":[\"static/css/_app-pages-browser_components_DeliveryCardMap_tsx.css\",\"static/chunks/_app-pages-browser_components_DeliveryCardMap_tsx.js\"]}}"

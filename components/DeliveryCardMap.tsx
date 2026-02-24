@@ -14,9 +14,10 @@ const defaultIcon = L.icon({
 });
 L.Marker.prototype.options.icon = defaultIcon;
 
-// Demo route: two points in Aberdeen, Scotland (pickup → drop-off)
-const PICKUP: [number, number] = [57.147, -2.098];   // west end
-const DROPOFF: [number, number] = [57.152, -2.088]; // city centre
+// Aberdeen, Scotland — demo route (pickup → drop-off)
+const ABERDEEN_CENTER: [number, number] = [57.1497, -2.0943];
+const PICKUP: [number, number] = [57.147, -2.098];
+const DROPOFF: [number, number] = [57.152, -2.088];
 const ROUTE: [number, number][] = [PICKUP, DROPOFF];
 
 export default function DeliveryCardMap() {
@@ -31,8 +32,8 @@ export default function DeliveryCardMap() {
     if (!mounted || typeof window === "undefined" || !containerRef.current) return;
 
     const map = L.map(containerRef.current, {
-      center: [(PICKUP[0] + DROPOFF[0]) / 2, (PICKUP[1] + DROPOFF[1]) / 2],
-      zoom: 13,
+      center: ABERDEEN_CENTER,
+      zoom: 14,
       zoomControl: false,
       attributionControl: false,
     });
@@ -40,6 +41,8 @@ export default function DeliveryCardMap() {
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
     }).addTo(map);
+
+    map.setView(ABERDEEN_CENTER, 14);
 
     L.marker(PICKUP).addTo(map).bindTooltip("Pickup", { permanent: false });
     L.marker(DROPOFF).addTo(map).bindTooltip("Drop-off", { permanent: false });
