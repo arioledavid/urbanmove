@@ -32,13 +32,13 @@ export default function Navbar() {
       <nav className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-6 lg:px-8">
         <Link
           href="/"
-          className="flex shrink-0 items-center overflow-visible"
+          className="flex h-full shrink-0 items-center overflow-visible"
           aria-label="Urban Move Logistics home"
         >
           <img
             src="/logo.svg"
             alt="Urban Move Logistics"
-            className="h-9 w-auto origin-left -translate-x-12 scale-[3.2] object-contain object-left sm:scale-[3.6] lg:scale-[4]"
+            className="h-9 w-auto translate-y-3 origin-center scale-[3.2] object-contain sm:scale-[3.6] lg:scale-[4]"
             width={560}
             height={192}
           />

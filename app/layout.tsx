@@ -12,6 +12,14 @@ export const metadata: Metadata = {
   title: "Urban Move Logistics | Powering Local Deliveries at Scale",
   description:
     "Urban Move connects businesses to customers through a smart, reliable logistics network. No marketplace. No middlemen. Just movement.",
+  icons: {
+    icon: [
+      {
+        url: "/favicon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
