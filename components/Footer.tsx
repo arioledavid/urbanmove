@@ -9,49 +9,49 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row md:items-center">
           <Link
             href="/"
-            className="flex shrink-0 items-center overflow-visible"
+            className="flex shrink-0 items-center justify-center overflow-visible md:justify-start"
             aria-label="Urban Move Logistics home"
           >
             <img
               src="/logo.svg"
               alt="Urban Move Logistics"
-              className="h-9 w-auto origin-left scale-[2.2] object-contain object-left sm:scale-[2.5] lg:scale-[2.7]"
+              className="h-9 w-auto origin-center object-center scale-[3.2] object-contain md:origin-left md:object-left sm:scale-[3.6] lg:scale-[4]"
               width={560}
               height={192}
             />
           </Link>
-          <div className="flex gap-8">
+          <nav className="flex flex-col items-center gap-2 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6 md:gap-8 md:justify-start">
             <Link
               href="#about"
-              className="text-sm text-gray-500 hover:text-gray-900"
+              className="whitespace-nowrap text-sm text-gray-500 hover:text-gray-900"
             >
               About
             </Link>
             <Link
               href="#how-it-works"
-              className="text-sm text-gray-500 hover:text-gray-900"
+              className="whitespace-nowrap text-sm text-gray-500 hover:text-gray-900"
             >
               How It Works
             </Link>
             <Link
               href="#for-businesses"
-              className="text-sm text-gray-500 hover:text-gray-900"
+              className="whitespace-nowrap text-sm text-gray-500 hover:text-gray-900"
             >
               For Businesses
             </Link>
             <Link
               href="#for-riders"
-              className="text-sm text-gray-500 hover:text-gray-900"
+              className="whitespace-nowrap text-sm text-gray-500 hover:text-gray-900"
             >
               For Riders
             </Link>
             <Link
               href="#join"
-              className="text-sm text-gray-500 hover:text-gray-900"
+              className="whitespace-nowrap text-sm text-gray-500 hover:text-gray-900"
             >
               Join the Movement
             </Link>
-          </div>
+          </nav>
         </div>
         <p className="mt-8 text-center text-xs text-gray-400">
           © {new Date().getFullYear()} Urban Move Logistics. All rights

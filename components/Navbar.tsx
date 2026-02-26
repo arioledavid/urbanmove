@@ -38,7 +38,7 @@ export default function Navbar() {
           <img
             src="/logo.svg"
             alt="Urban Move Logistics"
-            className="h-9 w-auto origin-left scale-[2.2] object-contain object-left sm:scale-[2.5] lg:scale-[2.7]"
+            className="h-9 w-auto origin-left -translate-x-12 scale-[3.2] object-contain object-left sm:scale-[3.6] lg:scale-[4]"
             width={560}
             height={192}
           />

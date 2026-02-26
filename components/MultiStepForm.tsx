@@ -45,18 +45,25 @@ export default function MultiStepForm() {
     phone: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [submitted, setSubmitted] = useState(false);
+  const [docId, setDocId] = useState<string | null>(null);
   const [referralLink, setReferralLink] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGettingReferral, setIsGettingReferral] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const update = (key: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
     if (errors[key]) setErrors((prev) => ({ ...prev, [key]: "" }));
   };
 
-  const validateStep1 = () => {
+  const validateStep1 = (): boolean => {
     const e: Record<string, string> = {};
     if (!formData.fullName.trim()) e.fullName = "Full name is required.";
-    if (!formData.email.trim()) e.email = "Email is required.";
+    if (!formData.email.trim()) {
+      e.email = "Email is required.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      e.email = "Please enter a valid email address.";
+    }
     if (!formData.phone.trim()) e.phone = "Phone is required.";
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -83,14 +90,86 @@ export default function MultiStepForm() {
 
   const handleNext = () => {
     if (step === 1 && validateStep1()) setStep(2);
-    else if (step === 2 && validateStep2()) setStep(3);
+    else if (step === 2 && validateStep2()) handleSubmit();
   };
 
-  const handleSubmit = () => {
-    setSubmitted(true);
-    setReferralLink(
-      `${typeof window !== "undefined" ? window.location.origin : ""}/?ref=${formData.email?.replace(/@.*/, "")}`,
-    );
+  const resetFormState = () => {
+    setFormData({ fullName: "", email: "", phone: "" });
+    setErrors({});
+    setSubmitError(null);
+  };
+
+  const handleSubmit = async () => {
+    if (isSubmitting) return;
+    setSubmitError(null);
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/submit-application", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: userType,
+          fullName: formData.fullName.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          city: formData.city?.trim() ?? "",
+          businessName: formData.businessName?.trim() || null,
+          businessType: formData.businessType || null,
+          weeklyDeliveries: formData.weeklyDeliveries || null,
+          biggestChallenge: formData.biggestChallenge?.trim() || null,
+          offersDelivery: formData.offersDelivery || null,
+          vehicleType: formData.vehicleType || null,
+          deliveryExperience: formData.deliveryExperience || null,
+          preferredHours: formData.preferredHours?.trim() || null,
+          expectedEarnings: formData.expectedEarnings || null,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setSubmitError(data.error ?? "Something went wrong. Please try again.");
+        return;
+      }
+
+      setDocId(data.docId);
+      setStep(3);
+    } catch (err) {
+      console.error("Submission failed:", err);
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleGetReferralLink = async () => {
+    if (!docId || isGettingReferral) return;
+
+    setIsGettingReferral(true);
+    try {
+      const res = await fetch("/api/update-referral", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ docId }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setSubmitError(data.error ?? "Something went wrong. Please try again.");
+        return;
+      }
+
+      const code = data.referralCode ?? "";
+      const link = `${typeof window !== "undefined" ? window.location.origin : ""}/?ref=${code}`;
+      setReferralLink(link);
+    } catch (err) {
+      console.error("Update referral failed:", err);
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setIsGettingReferral(false);
+    }
   };
 
   const totalSteps = 3;
@@ -490,6 +569,9 @@ export default function MultiStepForm() {
                 </div>
               </>
             )}
+            {submitError && (
+              <p className="mt-4 text-sm text-[#fcb900]">{submitError}</p>
+            )}
             <div className="flex gap-3 pt-2">
               <motion.button
                 type="button"
@@ -503,17 +585,18 @@ export default function MultiStepForm() {
               <motion.button
                 type="button"
                 onClick={handleNext}
-                className="flex-1 rounded-xl bg-white py-3.5 font-semibold text-[#e0110c]"
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
+                disabled={isSubmitting}
+                className="flex-1 rounded-xl bg-white py-3.5 font-semibold text-[#e0110c] disabled:cursor-not-allowed disabled:opacity-70"
+                whileHover={!isSubmitting ? { scale: 1.01 } : undefined}
+                whileTap={!isSubmitting ? { scale: 0.99 } : undefined}
               >
-                Continue
+                {isSubmitting ? "Submitting…" : "Submit"}
               </motion.button>
             </div>
           </motion.div>
         )}
 
-        {step === 3 && !submitted && (
+        {step === 3 && (
           <motion.div
             key="step3"
             initial={{ opacity: 0, x: 20 }}
@@ -532,33 +615,10 @@ export default function MultiStepForm() {
             <p className="mt-6 text-sm text-white/80">
               Invite 3 businesses or riders to join the movement.
             </p>
-            <motion.button
-              type="button"
-              onClick={handleSubmit}
-              className="mt-8 w-full rounded-xl bg-white py-3.5 font-semibold text-[#e0110c]"
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
-            >
-              Share My Referral Link
-            </motion.button>
-          </motion.div>
-        )}
-
-        {step === 3 && submitted && (
-          <motion.div
-            key="success"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-center"
-          >
-            <div className="text-4xl">✓</div>
-            <h3 className="mt-4 text-xl font-bold text-white">
-              You&apos;re on the list.
-            </h3>
-            <p className="mt-2 text-white/90">
-              Check your email for your referral link and next steps.
-            </p>
-            {referralLink && (
+            {submitError && (
+              <p className="mt-4 text-sm text-[#fcb900]">{submitError}</p>
+            )}
+            {referralLink ? (
               <div className="mt-6 rounded-xl bg-white/10 p-4">
                 <p className="text-xs text-white/70">Your referral link</p>
                 <p className="mt-1 break-all font-mono text-sm text-white">
@@ -572,6 +632,15 @@ export default function MultiStepForm() {
                   Copy link
                 </button>
               </div>
+            ) : (
+              <button
+                type="button"
+                onClick={handleGetReferralLink}
+                disabled={isGettingReferral}
+                className="mt-8 w-full rounded-xl bg-white py-3.5 font-semibold text-[#e0110c] disabled:cursor-not-allowed disabled:opacity-70 hover:opacity-90 transition"
+              >
+                {isGettingReferral ? "Generating…" : "Get my referral link"}
+              </button>
             )}
           </motion.div>
         )}

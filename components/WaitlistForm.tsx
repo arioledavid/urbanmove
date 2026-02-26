@@ -1,7 +1,9 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import MultiStepForm from "./MultiStepForm";
+
+const MultiStepForm = dynamic(() => import("./MultiStepForm"), { ssr: false });
 
 export default function WaitlistForm() {
   return (
